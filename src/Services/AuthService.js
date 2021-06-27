@@ -31,6 +31,6 @@ export default {
                     return res.json().then(data => data);
                 else    
                     return { isAuthenticated : false, user : {username : '', role : ''}};
-            })
+            }) 
     }
 }
