@@ -1,17 +1,9 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
-const UesrSchema = new Schema ({
-    firstname: {
-        type: String,
-        trim: true,
-    },
-    lastname: {
-        type: String,
-        trim: true,
-    },
-    username: {
+const UserSchema = new Schema ({
+    username: { 
         type: String,
         time: true,
         unique: true,
@@ -28,6 +20,12 @@ const UesrSchema = new Schema ({
             'Password should be longer',
         ],
     },
+    role : {
+        type: String,
+        enum: ['user', 'admin'],
+        required: true
+    },
+    todos : [{type: mongoose.Schema.Types.ObjectId, ref: 'Todo'}]
     email: {
         type: String,
         unique: true,
@@ -39,6 +37,27 @@ const UesrSchema = new Schema ({
     },
 });
 
-const User = mongoose.model('User', UserSchema);
+UserSchema.pre('save', function (next) {
+    if(!this.isModified('password'))
+        return next();
+    bcrypt.hash(this.password, 10, (err, passHash) => {
+        if (err)
+            return next(err);
+        this.password = passHash;
+        next()
+    })
+})
 
-module.exports = User;
+UserSchema.methods.comparePassword = function (password, cb) {
+    bcrypt.compare(password, this.password, (err, isMatch) => {
+        if (err)
+            return cb(err);
+        else {
+            if(!isMatch)
+                return cb(null, isMatch);
+            return cb(null, this);
+        }
+    })
+}
+
+module.exports = mongoose.model('User', UserSchema)
