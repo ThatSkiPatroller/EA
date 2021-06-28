@@ -22,8 +22,8 @@ mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
-const userRouter = require('./routes/User');
-app.use('user', userRouter);
+const userRouter = require('./routes/User.js');
+app.use('/user', userRouter);
 
 
 app.listen(PORT, function() {
