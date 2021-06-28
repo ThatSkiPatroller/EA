@@ -1,5 +1,4 @@
 import React from "react";
-import { AuthContext } from './Context/AuthContext';
 import Navbar from './Components/Navbar';
 import Login from './Components/Login';
 import Home from './Components/Home';
