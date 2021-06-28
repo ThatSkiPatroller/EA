@@ -3,8 +3,8 @@ export default {
         return fetch('/user/todos')
             .then(response => {
                 // passport sends 401 if user is not authorized
-                if(response.status != 401) {
-                    return respones.json().then(data => data);
+                if(response.status !== 401) {
+                    return response.json().then(data => data);
                 } else {
                     return {message : {msgBody : 'UnAuthorized'}, msgError : true}
                 }
@@ -17,9 +17,9 @@ export default {
         headers : {
             'Content=Type' : 'application/json'
         }
-    }).then(repsponse => {
-        if(response.status != 401) {
-            return respones.json().then(data => data);
+    }).then(response => {
+        if(response.status !== 401) {
+            return response.json().then(data => data);
         } else {
             return {message : {msgBody : 'UnAuthorized'}, msgError : true}
         }

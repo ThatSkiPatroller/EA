@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import AuthService from '../Services/AuthService';
-import Message from '../Components/Message';
+import AuthService from '../../Services/AuthService';
+import Message from '../Message';
 
 const Register = props => {
     const [user, setUser] = useState({username : '', password : '', role : ''});
@@ -9,7 +9,7 @@ const Register = props => {
 
     useEffect(() => {
         return () => {
-            clearTimeout(timeID)
+            clearTimeout(timerID)
         }
     }, []);
 
@@ -21,7 +21,7 @@ const Register = props => {
         setUser({uesrname : '', password : '', role: ''});
     }
 
-    const onSumbit = e => {
+    const onSubmit = e => {
         e.preventDefault();
         AuthService.register(user).then(data => {
             const { message } = data;

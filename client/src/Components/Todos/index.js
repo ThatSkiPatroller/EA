@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import TodoItem from './TodoItem';
-import TodoService from '../Services/TodoService';
-import Message from './Message';
+import TodoItem from '../TodoItem';
+import TodoService from '../../Services/TodoService';
+import Message from '../Message';
 import { AuthContext } from '../../Context/AuthContext';
 
 const Todos = props => {
