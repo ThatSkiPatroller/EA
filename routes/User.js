@@ -49,7 +49,7 @@ userRouter.get('/logout', passport.authenticate('jwt', {session : false}), (req,
     res.json({user: {username : '', role : '', success : true }});
 });
 
-userRouter.post('/todo', passport.authenticated('jwt', {session : false}), (req, res) => {
+userRouter.post('/todo', passport.authenticate('jwt', {session : false}), (req, res) => {
     const todo = new Todo(req.body);
     todo.save(err => {
         if (err)
@@ -66,7 +66,7 @@ userRouter.post('/todo', passport.authenticated('jwt', {session : false}), (req,
     })
 });
 
-userRouter.get('/todos', passport.authenticated('jwt', {session : false}), (req, res) => {
+userRouter.get('/todos', passport.authenticate('jwt', {session : false}), (req, res) => {
     User.findById({_id : req.user._id}).populate('todos').exec((err, document) => {
         if (err)
             res.status(500).json({message : {msgBody : 'Error has ocurred', msgError: true}});
@@ -76,7 +76,7 @@ userRouter.get('/todos', passport.authenticated('jwt', {session : false}), (req,
     })
 });
 
-userRouter.get('/admin', passport.authenticated('jwt', {session : false}), (req, res) => {
+userRouter.get('/admin', passport.authenticate('jwt', {session : false}), (req, res) => {
     if(req.user.role === 'admin') {
         res.status(200).json({message : {msgBody : 'You are an admin', msgError : false}});
     }
@@ -84,7 +84,7 @@ userRouter.get('/admin', passport.authenticated('jwt', {session : false}), (req,
         res.status(403).json({message : {msgBody : 'You are not an admin!', msgError : true}});
 });
 
-userRouter.get('/authenticated', passport.authenticated('jwt', {session : false}), (req, res) => {
+userRouter.get('/authenticated', passport.authenticate('jwt', {session : false}), (req, res) => {
     const {username, role} = req.user;
     res.status(200).json({isAuthenticated : true, user : {username, role}});
 });

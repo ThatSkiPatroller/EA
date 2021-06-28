@@ -25,7 +25,7 @@ const UserSchema = new Schema ({
         enum: ['user', 'admin'],
         required: true
     },
-    todos : [{type: mongoose.Schema.Types.ObjectId, ref: 'Todo'}]
+    todos : [{type: mongoose.Schema.Types.ObjectId, ref: 'Todo'}],
     email: {
         type: String,
         unique: true,

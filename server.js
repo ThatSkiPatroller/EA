@@ -5,7 +5,6 @@ const PORT = process.env.PORT || 3001;
 
 
 // Serve up static assets (usually on heroku)
-const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(cookieParser());
@@ -15,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('clinet/build'));
 }
 
-mongoose.connect(proces.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 var MONGODB_URI = process.env.MONGODB_URI;
 mongoose.Promise = Promise;
