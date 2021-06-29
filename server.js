@@ -25,6 +25,9 @@ mongoose.connect(MONGODB_URI, {
 const userRouter = require('./routes/User');
 app.use('/user', userRouter);
 
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
