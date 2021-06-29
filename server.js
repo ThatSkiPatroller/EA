@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('clinet/build'));
+  app.use(express.static('client/build'));
 }
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -22,7 +22,7 @@ mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
-const userRouter = require('./routes/User.js');
+const userRouter = require('./routes/User');
 app.use('/user', userRouter);
 
 
